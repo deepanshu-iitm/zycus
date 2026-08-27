@@ -87,19 +87,7 @@ Streamlit app with a triage form and an account-brief picker.
 
 Current versions: `triage_v1`, `brief_v1` in `prompts/`. Changes are recorded in `prompts/CHANGELOG.md`.
 
-## Deploy (Streamlit Cloud)
 
-1. Push `main` to GitHub (repo must be **public**).
-2. Open [share.streamlit.io](https://share.streamlit.io), sign in with GitHub, **Create app**.
-3. Repository: `deepanshu-iitm/zycus` · Branch: `main` · Main file: `ui/app.py`.
-4. **Advanced settings → Secrets** (never put these in git):
-
-```
-OPENAI_API_KEY = "your-key"
-OPENAI_MODEL = "gpt-4o-mini"
-DATASET_AS_OF = "2026-05-22"
-```
-
-5. Deploy. Copy the `*.streamlit.app` URL into the Live demo section above and send it with the repo link.
+Deployed link: https://4fyi8rnstr9kcgiaanpny4.streamlit.app/
 
 Reviewers clicking the app will use **your** OpenAI quota. The free Cloud app may sleep; the first open can take a minute.
