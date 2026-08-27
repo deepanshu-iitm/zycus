@@ -55,7 +55,7 @@ python -m support_copilot eval
 
 Writes `reports/eval_report.json` and `reports/eval_report.md`. Latest checked-in run: **10/10**, quality **1.0**.
 
-**UI (bonus)**
+**UI**
 
 ```powershell
 python -m support_copilot ui
@@ -67,3 +67,7 @@ Streamlit app with a triage form and an account-brief picker.
 
 - Ticket `account_id` values rarely match `accounts.json`. Briefs join by **company name** first, then id.
 - Gold labels on tickets (`product`, `category`, `urgency`) are not passed into the live triage prompt. They exist only in the dataset file.
+
+## Prompts
+
+Current versions: `triage_v1`, `brief_v1` in `prompts/`. Changes are recorded in `prompts/CHANGELOG.md`.

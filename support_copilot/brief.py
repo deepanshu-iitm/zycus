@@ -4,18 +4,7 @@ from support_copilot.brief_risks import extract_risk_flags
 from support_copilot.brief_schema import AccountBrief
 from support_copilot.data_store import get_account, tickets_for_account
 from support_copilot.llm import complete_json
-
-_SYSTEM = """You write a QBR prep brief for a Technical Account Manager.
-Return JSON with keys: executive_summary, talking_points.
-
-executive_summary: 3 to 5 sentences. Cover health, usage, support load, and renewal risk. Do not invent facts.
-talking_points: 3 to 6 short bullets the TAM can use on a call.
-
-Use only the account facts, ticket list, and risk flags provided.
-Do not add risks that are not in the flag list.
-Do not invent quotes, ticket IDs, or metrics.
-If ticket history is thin, say so in the summary.
-"""
+from support_copilot.prompts import load_prompt
 
 
 def _ticket_lines(tickets: list[dict]) -> str:
@@ -65,7 +54,7 @@ def generate_brief(account_id: str) -> AccountBrief:
 
     payload = complete_json(
         [
-            {"role": "system", "content": _SYSTEM},
+            {"role": "system", "content": load_prompt("brief")},
             {
                 "role": "user",
                 "content": (
