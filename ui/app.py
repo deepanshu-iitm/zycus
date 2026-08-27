@@ -1,30 +1,25 @@
 from __future__ import annotations
 
-import importlib
 import sys
 from pathlib import Path
 
 import streamlit as st
 
+st.set_page_config(page_title="Support Copilot", layout="wide")
+
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-import support_copilot.brief as brief_mod
-import support_copilot.llm as llm_mod
-import support_copilot.triage as triage_mod
-
-importlib.reload(llm_mod)
-importlib.reload(triage_mod)
-importlib.reload(brief_mod)
-
 from support_copilot.brief import generate_brief
+from support_copilot.config import get_settings
 from support_copilot.data_store import load_accounts
 from support_copilot.triage import triage
 
-st.set_page_config(page_title="Support Copilot", layout="wide")
+get_settings.cache_clear()
+
 st.title("Support Copilot")
-st.caption("Ticket triage for support engineers · account briefs for TAMs")
+st.caption("Ticket triage for support engineers · account briefs for TAMs. Synthetic demo data only.")
 
 triage_tab, brief_tab = st.tabs(["Ticket triage", "TAM account brief"])
 

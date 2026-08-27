@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from pathlib import Path
 
@@ -21,6 +22,25 @@ class Settings(BaseSettings):
     dataset_as_of: str = Field(default="2026-05-22", alias="DATASET_AS_OF")
 
 
+def _merge_streamlit_secrets() -> None:
+    try:
+        import streamlit as st
+
+        secrets = st.secrets
+    except Exception:
+        return
+    for key in ("OPENAI_API_KEY", "OPENAI_MODEL", "DATASET_AS_OF"):
+        if os.environ.get(key, "").strip():
+            continue
+        try:
+            value = secrets[key]
+        except Exception:
+            continue
+        if value:
+            os.environ[key] = str(value)
+
+
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
+    _merge_streamlit_secrets()
     return Settings()
