@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 
 from support_copilot.brief import generate_brief
 from support_copilot.triage import triage
@@ -17,6 +18,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     brief_parser = subparsers.add_parser("brief", help="Generate a TAM account brief")
     brief_parser.add_argument("account_id", help="Account ID, for example ACC-2944")
+
+    subparsers.add_parser("eval", help="Run the evaluation harness")
     return parser
 
 
@@ -41,6 +44,14 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print(result.model_dump_json(indent=2))
         return 0
+
+    if args.command == "eval":
+        from support_copilot.evaluate import run_eval
+
+        report = run_eval()
+        print(json.dumps(report, indent=2))
+        print(f"Passed {report['pass_count']}/{report['case_count']} · quality {report['quality']}")
+        return 0 if report["pass_count"] == report["case_count"] else 1
 
     return 1
 
