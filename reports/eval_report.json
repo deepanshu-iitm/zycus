@@ -1,0 +1,293 @@
+{
+  "pass_count": 10,
+  "case_count": 10,
+  "quality": 1.0,
+  "results": [
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_reasoning",
+          "pass": true
+        },
+        {
+          "name": "has_first_response",
+          "pass": true
+        },
+        {
+          "name": "has_team",
+          "pass": true
+        },
+        {
+          "name": "product",
+          "pass": true
+        },
+        {
+          "name": "category",
+          "pass": true
+        },
+        {
+          "name": "kb_match",
+          "pass": true
+        }
+      ],
+      "id": "t1_connection_timeout",
+      "task": "triage",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_reasoning",
+          "pass": true
+        },
+        {
+          "name": "has_first_response",
+          "pass": true
+        },
+        {
+          "name": "has_team",
+          "pass": true
+        },
+        {
+          "name": "product",
+          "pass": true
+        },
+        {
+          "name": "kb_match",
+          "pass": true
+        }
+      ],
+      "id": "t2_insufficient_scope",
+      "task": "triage",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_reasoning",
+          "pass": true
+        },
+        {
+          "name": "has_first_response",
+          "pass": true
+        },
+        {
+          "name": "has_team",
+          "pass": true
+        },
+        {
+          "name": "category",
+          "pass": true
+        },
+        {
+          "name": "kb_match",
+          "pass": true
+        }
+      ],
+      "id": "t3_billing_seats",
+      "task": "triage",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_reasoning",
+          "pass": true
+        },
+        {
+          "name": "has_first_response",
+          "pass": true
+        },
+        {
+          "name": "has_team",
+          "pass": true
+        },
+        {
+          "name": "category",
+          "pass": true
+        },
+        {
+          "name": "kb_match",
+          "pass": true
+        }
+      ],
+      "id": "t4_onboarding_how_to",
+      "task": "triage",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_reasoning",
+          "pass": true
+        },
+        {
+          "name": "has_first_response",
+          "pass": true
+        },
+        {
+          "name": "has_team",
+          "pass": true
+        },
+        {
+          "name": "product_allowed",
+          "pass": true
+        }
+      ],
+      "id": "t5_adversarial_ambiguous",
+      "task": "triage",
+      "adversarial": true
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_summary",
+          "pass": true
+        },
+        {
+          "name": "summary_length",
+          "pass": true
+        },
+        {
+          "name": "has_talking_points",
+          "pass": true
+        },
+        {
+          "name": "flags_have_quotes",
+          "pass": true
+        },
+        {
+          "name": "company",
+          "pass": true
+        },
+        {
+          "name": "summary_includes",
+          "pass": true
+        },
+        {
+          "name": "flag_quote",
+          "pass": true
+        }
+      ],
+      "id": "b1_churning",
+      "task": "brief",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_summary",
+          "pass": true
+        },
+        {
+          "name": "summary_length",
+          "pass": true
+        },
+        {
+          "name": "has_talking_points",
+          "pass": true
+        },
+        {
+          "name": "flags_have_quotes",
+          "pass": true
+        },
+        {
+          "name": "company",
+          "pass": true
+        },
+        {
+          "name": "summary_excludes",
+          "pass": true
+        }
+      ],
+      "id": "b2_healthy",
+      "task": "brief",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_summary",
+          "pass": true
+        },
+        {
+          "name": "summary_length",
+          "pass": true
+        },
+        {
+          "name": "has_talking_points",
+          "pass": true
+        },
+        {
+          "name": "flags_have_quotes",
+          "pass": true
+        },
+        {
+          "name": "summary_includes",
+          "pass": true
+        }
+      ],
+      "id": "b3_new_account",
+      "task": "brief",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "has_summary",
+          "pass": true
+        },
+        {
+          "name": "summary_length",
+          "pass": true
+        },
+        {
+          "name": "has_talking_points",
+          "pass": true
+        },
+        {
+          "name": "flags_have_quotes",
+          "pass": true
+        },
+        {
+          "name": "flag_quote",
+          "pass": true
+        }
+      ],
+      "id": "b4_at_risk",
+      "task": "brief",
+      "adversarial": false
+    },
+    {
+      "pass": true,
+      "quality": 1.0,
+      "checks": [
+        {
+          "name": "raises_for_unknown_account",
+          "pass": true
+        }
+      ],
+      "id": "b5_adversarial_unknown_id",
+      "task": "brief",
+      "adversarial": true
+    }
+  ]
+}
