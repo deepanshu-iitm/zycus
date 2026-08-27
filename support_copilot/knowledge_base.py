@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from functools import lru_cache
 
 from support_copilot.config import ROOT_DIR
@@ -19,3 +20,34 @@ def load_documents() -> list[dict]:
             }
         )
     return documents
+
+
+def _first_heading(text: str, fallback: str) -> str:
+    for line in text.splitlines():
+        if line.startswith("#"):
+            return line.lstrip("#").strip()
+    return fallback
+
+
+def _chunk_document(document: dict) -> list[dict]:
+    parts = [part.strip() for part in re.split(r"(?m)^---\s*$", document["text"]) if part.strip()]
+    chunks = []
+    for index, part in enumerate(parts):
+        chunks.append(
+            {
+                "chunk_id": f"{document['path']}#{index}",
+                "path": document["path"],
+                "title": document["title"],
+                "heading": _first_heading(part, document["title"]),
+                "text": part,
+            }
+        )
+    return chunks
+
+
+@lru_cache(maxsize=1)
+def load_chunks() -> list[dict]:
+    chunks: list[dict] = []
+    for document in load_documents():
+        chunks.extend(_chunk_document(document))
+    return chunks
