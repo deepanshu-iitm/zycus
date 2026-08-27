@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
 
 from support_copilot.brief import generate_brief
+from support_copilot.config import ROOT_DIR
 from support_copilot.triage import triage
 
 
@@ -20,6 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     brief_parser.add_argument("account_id", help="Account ID, for example ACC-2944")
 
     subparsers.add_parser("eval", help="Run the evaluation harness")
+    subparsers.add_parser("ui", help="Launch the Streamlit demo")
     return parser
 
 
@@ -52,6 +56,10 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, indent=2))
         print(f"Passed {report['pass_count']}/{report['case_count']} · quality {report['quality']}")
         return 0 if report["pass_count"] == report["case_count"] else 1
+
+    if args.command == "ui":
+        app = ROOT_DIR / "ui" / "app.py"
+        return subprocess.call([sys.executable, "-m", "streamlit", "run", str(app)])
 
     return 1
 
