@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from openai import OpenAI
 
 from support_copilot.config import get_settings
@@ -23,3 +25,14 @@ def complete(messages: list[dict], temperature: float = 0.1) -> str:
         temperature=temperature,
     )
     return (response.choices[0].message.content or "").strip()
+
+
+def complete_json(messages: list[dict], temperature: float = 0.1) -> dict:
+    settings = get_settings()
+    response = get_client().chat.completions.create(
+        model=settings.openai_model,
+        messages=messages,
+        temperature=temperature,
+        response_format={"type": "json_object"},
+    )
+    return json.loads(response.choices[0].message.content or "{}")
