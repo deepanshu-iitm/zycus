@@ -89,5 +89,3 @@ Current versions: `triage_v1`, `brief_v1` in `prompts/`. Changes are recorded in
 
 
 Deployed link: https://4fyi8rnstr9kcgiaanpny4.streamlit.app/
-
-Reviewers clicking the app will use **your** OpenAI quota. The free Cloud app may sleep; the first open can take a minute.
