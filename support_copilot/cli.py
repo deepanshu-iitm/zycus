@@ -25,6 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     subparsers.add_parser("eval", help="Run the evaluation harness")
     subparsers.add_parser("ui", help="Launch the Streamlit demo")
+    subparsers.add_parser("smoke", help="Run local checks that do not call OpenAI")
     return parser
 
 
@@ -62,6 +63,11 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, indent=2))
         print(f"Passed {report['pass_count']}/{report['case_count']} · quality {report['quality']}")
         return 0 if report["pass_count"] == report["case_count"] else 1
+
+    if args.command == "smoke":
+        from support_copilot.smoke import main as smoke_main
+
+        return smoke_main()
 
     if args.command == "ui":
         app = ROOT_DIR / "ui" / "app.py"

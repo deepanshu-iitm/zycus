@@ -54,7 +54,15 @@ python -m support_copilot brief ACC-2944
 python -m support_copilot eval
 ```
 
-Writes `reports/eval_report.json` and `reports/eval_report.md`. Latest checked-in run: **10/10**, quality **1.0**.
+Writes `reports/eval_report.json` and `reports/eval_report.md`. Latest checked-in run: **10/10**, quality **1.0**. Needs an OpenAI key.
+
+**Local / CI smoke checks (no API key)**
+
+```powershell
+python -m support_copilot smoke
+```
+
+GitHub Actions runs this on every push.
 
 **UI**
 
