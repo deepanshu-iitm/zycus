@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 import sys
 from pathlib import Path
 
@@ -8,6 +9,14 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+import support_copilot.brief as brief_mod
+import support_copilot.llm as llm_mod
+import support_copilot.triage as triage_mod
+
+importlib.reload(llm_mod)
+importlib.reload(triage_mod)
+importlib.reload(brief_mod)
 
 from support_copilot.brief import generate_brief
 from support_copilot.data_store import load_accounts
