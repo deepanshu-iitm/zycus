@@ -44,14 +44,6 @@ def _product_fit(query_products: set[str], chunk: dict) -> int:
     return 0
 
 
-def tokenize(text: str) -> list[str]:
-    return [token.lower() for token in _TOKEN.findall(text)]
-
-
-def _error_codes(text: str) -> set[str]:
-    return set(_ERROR_CODE.findall(text))
-
-
 @lru_cache(maxsize=1)
 def _bm25_index() -> tuple[list[dict], BM25Okapi]:
     chunks = load_chunks()
