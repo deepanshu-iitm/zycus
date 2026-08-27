@@ -18,6 +18,7 @@ def build_parser() -> argparse.ArgumentParser:
     triage_parser.add_argument("--text", default="", help="Raw ticket text")
     triage_parser.add_argument("--subject", default="", help="Ticket subject")
     triage_parser.add_argument("--body", default="", help="Ticket body")
+    triage_parser.add_argument("--stream", action="store_true", help="Stream model tokens")
 
     brief_parser = subparsers.add_parser("brief", help="Generate a TAM account brief")
     brief_parser.add_argument("account_id", help="Account ID, for example ACC-2944")
@@ -36,7 +37,12 @@ def main(argv: list[str] | None = None) -> int:
             ticket = args.text
         else:
             ticket = {"subject": args.subject, "body": args.body}
-        result = triage(ticket)
+        if args.stream:
+            print("Streaming model output:\n", flush=True)
+            result = triage(ticket, on_token=lambda token: print(token, end="", flush=True))
+            print("\n")
+        else:
+            result = triage(ticket)
         print(result.model_dump_json(indent=2))
         return 0
 

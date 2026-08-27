@@ -23,12 +23,23 @@ with triage_tab:
     st.subheader("Incoming ticket")
     subject = st.text_input("Subject")
     body = st.text_area("Body", height=180)
+    stream = st.checkbox("Stream model output")
     if st.button("Triage ticket", type="primary"):
         if not subject.strip() and not body.strip():
             st.warning("Enter a subject or body.")
         else:
+            stream_box = st.empty()
+            buf: list[str] = []
+
+            def on_token(token: str) -> None:
+                buf.append(token)
+                stream_box.code("".join(buf), language="json")
+
             with st.spinner("Triaging…"):
-                result = triage({"subject": subject, "body": body})
+                result = triage(
+                    {"subject": subject, "body": body},
+                    on_token=on_token if stream else None,
+                )
             c1, c2, c3, c4 = st.columns(4)
             c1.metric("Product", result.product)
             c2.metric("Category", result.category)

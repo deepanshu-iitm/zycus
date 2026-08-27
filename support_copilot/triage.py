@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Callable
+
 from support_copilot.llm import complete_json
 from support_copilot.prompts import load_prompt
 from support_copilot.retriever import retrieve
@@ -35,7 +37,7 @@ def _normalize(ticket: str | dict) -> tuple[str, str]:
     return subject, body
 
 
-def triage(ticket: str | dict) -> TriageResult:
+def triage(ticket: str | dict, on_token: Callable[[str], None] | None = None) -> TriageResult:
     subject, body = _normalize(ticket)
     query = f"{subject}\n{body}".strip()
     hits = retrieve(query, top_k=4)
@@ -55,7 +57,8 @@ def triage(ticket: str | dict) -> TriageResult:
                     f"Knowledge-base excerpts:\n{excerpts}"
                 ),
             },
-        ]
+        ],
+        on_token=on_token,
     )
 
     product = payload.get("product", "Unknown")

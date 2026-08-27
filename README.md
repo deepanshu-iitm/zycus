@@ -35,6 +35,7 @@ Single entry point: `python -m support_copilot <command>`
 
 ```powershell
 python -m support_copilot triage --text "DataBridge Pro pipeline failed with ERR_CONNECTION_TIMEOUT in production."
+python -m support_copilot triage --stream --text "DataBridge Pro pipeline failed with ERR_CONNECTION_TIMEOUT in production."
 ```
 
 Or `--subject` and `--body`. Output includes product, category, P1–P4 urgency, reasoning, responder team, draft first response, and knowledge-base matches.
