@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 
+from support_copilot.brief import generate_brief
 from support_copilot.triage import triage
 
 
@@ -13,6 +14,9 @@ def build_parser() -> argparse.ArgumentParser:
     triage_parser.add_argument("--text", default="", help="Raw ticket text")
     triage_parser.add_argument("--subject", default="", help="Ticket subject")
     triage_parser.add_argument("--body", default="", help="Ticket body")
+
+    brief_parser = subparsers.add_parser("brief", help="Generate a TAM account brief")
+    brief_parser.add_argument("account_id", help="Account ID, for example ACC-2944")
     return parser
 
 
@@ -26,6 +30,15 @@ def main(argv: list[str] | None = None) -> int:
         else:
             ticket = {"subject": args.subject, "body": args.body}
         result = triage(ticket)
+        print(result.model_dump_json(indent=2))
+        return 0
+
+    if args.command == "brief":
+        try:
+            result = generate_brief(args.account_id)
+        except ValueError as exc:
+            print(str(exc))
+            return 1
         print(result.model_dump_json(indent=2))
         return 0
 
